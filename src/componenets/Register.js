@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Background from '../images/register_background.jpg';
 import {
 	Col,
 	Form,
+	Alert,
 	FormGroup,
 	Label,
 	FormFeedback,
@@ -14,7 +16,8 @@ import {
 	InputGroup,
 	InputGroupAddon,
 	InputGroupText,
-	Input
+	Input,
+	Badge
 } from 'reactstrap';
 import Axios from 'axios';
 
@@ -70,126 +73,129 @@ export default class Register extends Component {
 
 	render() {
 		if (this.state.isRegistered === true) {
-			return <Redirect to="/dashboard" />;
+			return <Redirect to="/" />;
 		}
 		return (
-			<div id="mainRegister">
-				<div className="container">
-					<div
-						className="jumbotron"
-						style={{ opacity: 0.8, height: 'fit-content' }}
-					>
-						<Form
-							action="?"
-							method="post"
-							style={{ width: '50%', margin: '0 auto' }}
-						>
-							<h1> Register</h1>
-							<FormGroup row>
-								<Label for="exampleEmail" sm={3}>
-									Email
-								</Label>
-								<Col sm={9}>
-									<Input
-										type="email"
-										name="email"
-										id="email"
-										placeholder="email"
-										value={this.state.email}
-										onChange={this.handleChange}
-									/>
-								</Col>
-							</FormGroup>
-							<FormGroup row>
-								<Label for="examplePassword" sm={3}>
-									Password
-								</Label>
-								<Col sm={9}>
-									<Input
-										type="password"
-										name="password"
-										id="password"
-										placeholder="password"
-										value={this.state.password}
-										onChange={this.handleChange}
-									/>
-								</Col>
-							</FormGroup>
-							<FormGroup row>
-								<Label for="examplePassword" sm={3}>
-									First Name
-								</Label>
-								<Col sm={9}>
-									<Input
-										type="text"
-										name="firstname"
-										id="firstname"
-										placeholder="first name"
-										value={this.state.firstname}
-										onChange={this.handleChange}
-									/>
-								</Col>
-							</FormGroup>
-							<FormGroup row>
-								<Label for="examplePassword" sm={3}>
-									Last Name
-								</Label>
-								<Col sm={9}>
-									<Input
-										type="text"
-										name="lastname"
-										id="lastname"
-										placeholder="last name"
-										value={this.state.lastname}
-										onChange={this.handleChange}
-									/>
-								</Col>
-							</FormGroup>
-							<FormGroup row>
-								<Label for="examplePassword" sm={3}>
-									Phone Number
-								</Label>
-								<Col sm={9}>
-									<Input
-										type="number"
-										name="phonenumber"
-										id="phonenumber"
-										placeholder="phone number"
-										value={this.state.phonenumber}
-										onChange={this.handleChange}
-									/>
-								</Col>
-							</FormGroup>
-							<FormGroup row>
-								<Label for="exampleFile" sm={3}>
-									Profile Picture
-								</Label>
-								<Col sm={9}>
-									<Input
-										type="file"
-										name="profile_image"
-										id="profile_image"
-										onChange={this.handleFileChange}
-									/>
-									<FormText color="muted">
-										Please select an image from your computer.
-									</FormText>
-								</Col>
-							</FormGroup>
+			<div
+				className="jumbotron"
+				style={{
+					height: 'fit-content',
+					backgroundImage: 'url(' + Background + ')',
+					backgroundSize: 'cover'
+				}}
+			>
+				<Form
+					action="?"
+					method="post"
+					style={{ width: '50%', margin: '0 auto' }}
+				>
+					<h1> Register</h1>
+					<FormGroup row>
+						<Label for="exampleEmail" sm={3}>
+							Email
+						</Label>
+						<Col sm={9}>
+							<Input
+								type="email"
+								name="email"
+								id="email"
+								placeholder="email"
+								value={this.state.email}
+								onChange={this.handleChange}
+							/>
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="examplePassword" sm={3}>
+							Password
+						</Label>
+						<Col sm={9}>
+							<Input
+								type="password"
+								name="password"
+								id="password"
+								placeholder="password"
+								value={this.state.password}
+								onChange={this.handleChange}
+							/>
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="examplePassword" sm={3}>
+							First Name
+						</Label>
+						<Col sm={9}>
+							<Input
+								type="text"
+								name="firstname"
+								id="firstname"
+								placeholder="first name"
+								value={this.state.firstname}
+								onChange={this.handleChange}
+							/>
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="examplePassword" sm={3}>
+							Last Name
+						</Label>
+						<Col sm={9}>
+							<Input
+								type="text"
+								name="lastname"
+								id="lastname"
+								placeholder="last name"
+								value={this.state.lastname}
+								onChange={this.handleChange}
+							/>
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="examplePassword" sm={3}>
+							Phone Number
+						</Label>
+						<Col sm={9}>
+							<Input
+								type="number"
+								name="phonenumber"
+								id="phonenumber"
+								placeholder="phone number"
+								value={this.state.phonenumber}
+								onChange={this.handleChange}
+							/>
+						</Col>
+					</FormGroup>
+					<FormGroup row>
+						<Label for="exampleFile" sm={3}>
+							Profile Picture
+						</Label>
+						<Col sm={9}>
+							<Alert color="primary">
+								<Input
+									type="file"
+									name="profile_image"
+									id="profile_image"
+									onChange={this.handleFileChange}
+								/>
+								<FormText color="muted">
+									Please select an image from your computer.
+								</FormText>
+							</Alert>
+						</Col>
+					</FormGroup>
 
-							<FormGroup check row>
-								<Col sm={{ size: 10, offset: 1 }}>
-									<Button outline color="info" onClick={this.register}>
-										Submit
-									</Button>
-								</Col>
-								<p style={{ marginTop: 10 }}>
-									Go back to <a href={'/'}>Login</a>
-								</p>
-							</FormGroup>
-						</Form>
-					</div>
-				</div>
+					<FormGroup check row>
+						<Col sm={{ size: 10, offset: 1 }}>
+							<Button color="info" onClick={this.register}>
+								Submit
+							</Button>
+						</Col>
+
+						<Badge href={'/login'} style={{ marginTop: 15 }} color="info">
+							Go back to Login
+						</Badge>
+					</FormGroup>
+				</Form>
 			</div>
 		);
 	}
