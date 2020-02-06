@@ -39,6 +39,7 @@ export default class Login extends Component {
 				console.log(response.data);
 				localStorage.setItem('token', response.data.token);
 				this.setState({ isLoggedIn: true });
+				window.location = '/';
 			})
 			.catch(err => console.log(err.response));
 		this.setState({ email: '', password: '' });

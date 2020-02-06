@@ -12,14 +12,18 @@ function App() {
 		<div className="App">
 			<div className="container">
 				<NabBar />
-				<BrowserRouter>
-					<Switch>
-						<Route exact path="/login" component={Login} />
-						<Route exact path="/register" component={Register} />
-						<Route exact path="/" component={Dashboard} />
-					</Switch>
-				</BrowserRouter>
 			</div>
+
+			<BrowserRouter>
+				<Switch>
+					<Route exact path="/" component={Dashboard} />
+					<div className="container">
+						{' '}
+						<Route exact path="/login" component={Login} />
+						<Route exact path="/register" component={Register} />{' '}
+					</div>
+				</Switch>
+			</BrowserRouter>
 		</div>
 	);
 }

@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Link, withRouter, useHistory } from 'react-router-dom';
+import href from '../Login';
 import {
 	Collapse,
 	Navbar,
@@ -48,7 +49,9 @@ export default class Navbars extends Component {
 		// this.context.router.push('/login');
 	};
 
-	handleLogin = e => {};
+	handleLogin = e => {
+		window.location = '/login';
+	};
 
 	render() {
 		return (

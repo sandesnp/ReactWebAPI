@@ -8550,6 +8550,14 @@ react-app-polyfill@^1.0.5:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-bootstrap-carousel@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-carousel/-/react-bootstrap-carousel-4.0.2.tgz#51bb9c56472763039c9233bb875979de0652fb85"
+  integrity sha512-aYCuBXPZ+DY2dHzRq8i3uHvJmOcaPvXfWyHFcl5Xg5+GTy1Cl/iLUH9CT0M2y0GtxSoJ1w/Q73sqduwhq8IYTg==
+  dependencies:
+    react "^16.12.0"
+    react-dom "^16.12.0"
+
 react-dev-utils@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.0.0.tgz#bd2d16426c7e4cbfed1b46fb9e2ac98ec06fcdfa"
