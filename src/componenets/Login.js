@@ -18,6 +18,8 @@ import {
 	Alert
 } from 'reactstrap';
 
+let token;
+
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
