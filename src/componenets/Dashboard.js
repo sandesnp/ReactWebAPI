@@ -22,15 +22,15 @@ import Background03 from '../images/register_background.jpg';
 import axios from 'axios';
 
 const styles = { height: 400, width: '100%' };
-let token,
-	profileretrieved,
-	advertisementsRetrieved,
-	ThreeCard = [];
+let token, profileretrieved, advertisementsRetrieved;
+let ThreeCard = [];
+let DashSlider = [];
+let AllProduct = [];
 
 const responsive = {
 	desktop: {
 		breakpoint: { max: 3000, min: 1024 },
-		items: 2,
+		items: 4,
 		slidesToSlide: 1 // optional, default to 1.
 	},
 	tablet: {
@@ -48,14 +48,8 @@ const responsive = {
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			usersretrieved: profileretrieved
-		};
+		this.state = {};
 
-		axios.get('http://localhost:3001/adver/all').then(response => {
-			localStorage.setItem('advertisements', JSON.stringify(response.data));
-		});
-		//retrieveing advertise images
 		advertisementsRetrieved = JSON.parse(
 			localStorage.getItem('advertisements')
 		);
@@ -66,23 +60,15 @@ export default class Dashboard extends Component {
 				if (element.position === 'dashboardcard') {
 					ThreeCard.push(element);
 				}
+				if (element.position === 'dashboardslide') {
+					DashSlider.push(element);
+				}
 			});
-		}
-
-		if (localStorage.getItem('token')) {
-			token = {
-				headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-			};
-
-			axios.get('http://localhost:3001/users/profile', token).then(response => {
-				localStorage.setItem('profile', JSON.stringify(response.data));
-			});
-
-			profileretrieved = JSON.parse(localStorage.getItem('profile'));
 		}
 	}
 
 	render() {
+		const handleOnDragStart = e => e.preventDefault();
 		return (
 			<div>
 				{/*----------------------Section 1 */}
@@ -157,7 +143,8 @@ export default class Dashboard extends Component {
 						</Card>
 					))}
 				</Row>
-				;{/*----------------------Section 3 */}
+				<br />
+				{/*----------------------Section 3 */}
 				<div>
 					<Carousel
 						additionalTransfrom={0}
@@ -166,7 +153,6 @@ export default class Dashboard extends Component {
 						centerMode={false}
 						containerClass="container-with-dots"
 						draggable
-						focusOnSelect={false}
 						infinite
 						keyBoardControl
 						minimumTouchDrag={80}
@@ -177,23 +163,27 @@ export default class Dashboard extends Component {
 						slidesToSlide={1}
 						swipeable
 					>
-						{ThreeCard.map((card, key) => (
-							<Card className="col-10" key={card.id}>
+						{DashSlider.map((slider, key) => (
+							<Card className="col-11" key={slider.id} style={{ padding: 0 }}>
 								{' '}
 								{/*No key for now*/}
 								<CardImg
+									onDragStart={handleOnDragStart}
 									top
 									width="100%"
-									src={`http://localhost:3001/uploads/${card.image}`}
+									src={`http://localhost:3001/uploads/${slider.image}`}
 									alt="Card image cap"
 								/>
-								<CardBody>
-									<CardSubtitle>Card subtitle</CardSubtitle>
+								<CardBody style={{ padding: 0 }}>
+									<a href="/allproduct">
+										<CardTitle>{slider.position}</CardTitle>
+									</a>
 								</CardBody>
 							</Card>
 						))}
 					</Carousel>
 				</div>
+				<br />
 			</div>
 		);
 	}

@@ -14,7 +14,9 @@ import {
 	DropdownItem,
 	NavbarText
 } from 'reactstrap';
-let profileretrieved;
+import axios from 'axios';
+
+let profileretrieved, token;
 
 const NAB = props => {
 	let state = {
@@ -40,6 +42,29 @@ const NAB = props => {
 		window.location.reload(false);
 		// this.context.router.push('/login');
 	};
+
+	//retrieveing advertise images
+	axios.get('http://localhost:3001/adver/all').then(response => {
+		localStorage.setItem('advertisements', JSON.stringify(response.data));
+	});
+
+	//retrieveing product data
+	axios.get('http://localhost:3001/product/all').then(response => {
+		localStorage.setItem('products', JSON.stringify(response.data));
+	});
+
+	//retrieving users data if logged in
+	if (localStorage.getItem('token')) {
+		token = {
+			headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+		};
+
+		axios.get('http://localhost:3001/users/profile', token).then(response => {
+			localStorage.setItem('profile', JSON.stringify(response.data));
+
+			// profileretrieved = JSON.parse(localStorage.getItem('profile'));
+		});
+	}
 
 	let handleLogin = e => {
 		window.location = '/login';

@@ -6,6 +6,7 @@ import Login from './componenets/Login';
 import Register from './componenets/Register';
 import Dashboard from './componenets/Dashboard';
 import NabBar from './componenets/includes/Navbar';
+import AllProduct from './componenets/Allproduct';
 
 function App() {
 	return (
@@ -17,6 +18,8 @@ function App() {
 			<BrowserRouter>
 				<Switch>
 					<Route exact path="/" component={Dashboard} />
+					<Route exact path="/allproduct" component={AllProduct} />
+
 					<div className="container">
 						{' '}
 						<Route exact path="/login" component={Login} />
