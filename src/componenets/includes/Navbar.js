@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState, Component } from 'react';
 import {
 	Collapse,
 	Navbar,
@@ -11,59 +11,46 @@ import {
 	DropdownToggle,
 	Button,
 	DropdownMenu,
-	DropdownItem,
-	NavbarText
+	DropdownItem
 } from 'reactstrap';
 import axios from 'axios';
-
 let profileretrieved, token;
 
-const NAB = props => {
+export default function NAB() {
 	let state = {
-		user: {},
+		user: { firstname: null },
 		isLoggedIn: false,
-		user: null,
 		config: {
 			headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
 		}
 	};
 
-	// console.log(localStorage.getItem('token'));
-	if (localStorage.getItem('token')) {
-		state.isLoggedIn = true;
-		profileretrieved = JSON.parse(localStorage.getItem('profile'));
-	} else {
-		state.LogOrSin = false;
-	}
 	let handleLogout = e => {
 		e.preventDefault();
 		localStorage.removeItem('token');
+		localStorage.removeItem('profiles');
+		localStorage.removeItem('isLoggedIn');
 		// history.push('/');
-		window.location.reload(false);
+		// window.location.reload(false);
 		// this.context.router.push('/login');
+		window.location = '/';
 	};
-
-	//retrieveing advertise images
-	axios.get('http://localhost:3001/adver/all').then(response => {
-		localStorage.setItem('advertisements', JSON.stringify(response.data));
-	});
-
-	//retrieveing product data
-	axios.get('http://localhost:3001/product/all').then(response => {
-		localStorage.setItem('products', JSON.stringify(response.data));
-	});
 
 	//retrieving users data if logged in
 	if (localStorage.getItem('token')) {
-		token = {
-			headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-		};
+		state.isLoggedIn = true;
 
-		axios.get('http://localhost:3001/users/profile', token).then(response => {
-			localStorage.setItem('profile', JSON.stringify(response.data));
-
-			// profileretrieved = JSON.parse(localStorage.getItem('profile'));
-		});
+		if (!profileretrieved) {
+			token = {
+				headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+			};
+			axios.get('http://localhost:3001/users/profile', token).then(response => {
+				localStorage.setItem('profiles', JSON.stringify(response.data));
+			});
+			profileretrieved = JSON.parse(localStorage.getItem('profiles'));
+		}
+	} else {
+		state.LogOrSin = false;
 	}
 
 	let handleLogin = e => {
@@ -81,10 +68,10 @@ const NAB = props => {
 			<Collapse isOpen={isOpen} navbar>
 				<Nav className="mr-auto" navbar>
 					<NavItem>
-						<NavLink href="/components/">Home</NavLink>
+						<NavLink href="/">Home</NavLink>
 					</NavItem>
 					<NavItem>
-						<NavLink href="#">Category</NavLink>
+						<NavLink href="/allproduct">Products</NavLink>
 					</NavItem>
 					<UncontrolledDropdown nav inNavbar>
 						<DropdownToggle nav caret>
@@ -105,16 +92,13 @@ const NAB = props => {
 					</UncontrolledDropdown>
 				</Nav>
 				<Nav>
-					{state.isLoggedIn ? (
+					{profileretrieved ? (
 						<div>
 							<NavItem
 								style={{ float: 'left', paddingTop: 5, paddingRight: 5 }}
 							>
-								<NavLink href="#">{profileretrieved.firstname}</NavLink>
+								<NavLink href="/user"> {profileretrieved.email}</NavLink>
 							</NavItem>
-
-							{/* href="/abc"
-							 */}
 
 							<Button onClick={handleLogout}>Logout</Button>
 						</div>
@@ -125,6 +109,4 @@ const NAB = props => {
 			</Collapse>
 		</Navbar>
 	);
-};
-
-export default NAB;
+}

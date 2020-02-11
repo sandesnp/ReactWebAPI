@@ -1,13 +1,14 @@
-import React, { Component, useState, Fragment } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
 import RBCarousel from 'react-bootstrap-carousel';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import NabBar from './includes/Navbar';
+import axios from 'axios';
+
 import {
 	Row,
 	Col,
 	Button,
-	ButtonGroup,
 	Card,
 	CardImg,
 	CardText,
@@ -19,13 +20,11 @@ import 'react-bootstrap-carousel/dist/react-bootstrap-carousel.css';
 import Background01 from '../images/background.jpg';
 import Background02 from '../images/login_background.jpg';
 import Background03 from '../images/register_background.jpg';
-import axios from 'axios';
 
 const styles = { height: 400, width: '100%' };
-let token, profileretrieved, advertisementsRetrieved;
+let advertisementsRetrieved;
 let ThreeCard = [];
 let DashSlider = [];
-let AllProduct = [];
 
 const responsive = {
 	desktop: {
@@ -48,7 +47,10 @@ const responsive = {
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		//retrieveing advertise images
+		axios.get('http://localhost:3001/adver/all').then(response => {
+			localStorage.setItem('advertisements', JSON.stringify(response.data));
+		});
 
 		advertisementsRetrieved = JSON.parse(
 			localStorage.getItem('advertisements')
@@ -69,8 +71,11 @@ export default class Dashboard extends Component {
 
 	render() {
 		const handleOnDragStart = e => e.preventDefault();
+
 		return (
 			<div>
+				<NabBar />
+
 				{/*----------------------Section 1 */}
 				<div
 					className="container-fluid"
@@ -124,8 +129,8 @@ export default class Dashboard extends Component {
 				</div>
 				{/*----------------------Section 2 */}
 				<Row className="col-12" style={{ marginLeft: 5 }}>
-					{ThreeCard.map((card, key) => (
-						<Card className="col-4" key={card.id}>
+					{ThreeCard.map(card => (
+						<Card className="col-4" key={card._id}>
 							{' '}
 							{/*No key for now*/}
 							<CardImg
@@ -163,8 +168,8 @@ export default class Dashboard extends Component {
 						slidesToSlide={1}
 						swipeable
 					>
-						{DashSlider.map((slider, key) => (
-							<Card className="col-11" key={slider.id} style={{ padding: 0 }}>
+						{DashSlider.map(slider => (
+							<Card className="col-11" key={slider._id} style={{ padding: 0 }}>
 								{' '}
 								{/*No key for now*/}
 								<CardImg

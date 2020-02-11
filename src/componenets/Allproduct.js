@@ -1,33 +1,43 @@
-import React, { Component } from 'react';
-import {
-	Jumbotron,
-	Container,
-	Media,
-	Button,
-	Badge,
-	Card,
-	CardImg,
-	Row,
-	Col,
-	Pagination,
-	PaginationItem,
-	PaginationLink
-} from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Jumbotron, Container } from 'reactstrap';
+import Products from './includes/Allproducts';
+import Pagination from './includes/Pagination';
+import NabBar from './includes/Navbar';
+import axios from 'axios';
 
-let productsAll;
-let profileretrieved;
-let products = [];
-export default class Allproduct extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-		productsAll = JSON.parse(localStorage.getItem('products'));
-		profileretrieved = JSON.parse(localStorage.getItem('profile'));
-	}
+export default function Allproduct() {
+	const [games, setGames] = useState([]);
+	const [loading, setLoading] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postsPerPage] = useState(5);
 
-	render() {
-		return (
-			<div>
+	//retrieveing product data
+	axios.get('http://localhost:3001/product/all').then(response => {
+		localStorage.setItem('products', JSON.stringify(response.data));
+	});
+
+	useEffect(() => {
+		const fetchGames = async () => {
+			setLoading(true);
+			//retrieveing product data
+			setGames(JSON.parse(localStorage.getItem('products')));
+			setLoading(false);
+		};
+		fetchGames();
+	}, []);
+
+	//Get Current Posts
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOffFirstPost = indexOfLastPost - postsPerPage;
+	const currentPosts = games.slice(indexOffFirstPost, indexOfLastPost);
+
+	//current Page
+	const paginate = pageNumber => setCurrentPage(pageNumber);
+
+	return (
+		<div>
+			<NabBar />
+			<div className="container">
 				<Jumbotron fluid>
 					<Container fluid>
 						<h1 className="display-3">Browse Products</h1>
@@ -36,36 +46,13 @@ export default class Allproduct extends Component {
 						</p>
 					</Container>
 				</Jumbotron>
-
-				<div className="container">
-					{productsAll.map((products, key) => (
-						<Jumbotron fluid>
-							<Card style={{ padding: 0 }}>
-								<Row className="col-12">
-									<CardImg
-										className="col-3"
-										style={{ width: 200, float: 'left' }}
-										top
-										width="100%"
-										src={`http://localhost:3001/uploads/${products.image}`}
-										alt="Card image cap"
-									/>
-									<div
-										className="col-9"
-										style={{ textAlignVertical: 'center', textAlign: 'center' }}
-									>
-										<h2>{products.title}</h2>
-										<Col sm={{ size: 12, order: 0, offset: 0 }}>
-											{' '}
-											<h4>{products.description}</h4>
-										</Col>
-									</div>
-								</Row>
-							</Card>
-						</Jumbotron>
-					))}
-				</div>
 			</div>
-		);
-	}
+			<Pagination
+				postsPerPage={postsPerPage}
+				totalPosts={games.length}
+				paginate={paginate}
+			/>
+			<Products games={currentPosts} loading={loading} />
+		</div>
+	);
 }
