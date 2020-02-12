@@ -60,9 +60,9 @@ export default function Payment(props) {
 
 	const toggle = () => setModal(!modal);
 
-	const UserUpdate = () => {
-		let productMain = { product: [] };
-		axios
+	const UserUpdate = async () => {
+		let productMain = await { product: [] };
+		await axios
 			.get('http://localhost:3001/users/profile', CompleteToken.config)
 			.then(response => {
 				response.data.product.forEach(element => {
