@@ -90,6 +90,9 @@ export default function NAB() {
 							</a>
 						</DropdownMenu>
 					</UncontrolledDropdown>
+					<NavItem>
+						<NavLink href="#">Contact</NavLink>
+					</NavItem>
 				</Nav>
 				<Nav>
 					{profileretrieved ? (

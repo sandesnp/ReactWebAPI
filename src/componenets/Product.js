@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button, CardImg, Card, Row, Badge } from 'reactstrap';
+import {
+	Jumbotron,
+	Button,
+	CardImg,
+	Card,
+	Row,
+	Badge,
+	Alert
+} from 'reactstrap';
 import NabBar from './includes/Navbar';
 import axios from 'axios';
 
@@ -14,7 +22,8 @@ export default class Product extends Component {
 				price: null,
 				brand: null,
 				description: null
-			}
+			},
+			isloggedin: false
 		};
 	}
 
@@ -24,14 +33,33 @@ export default class Product extends Component {
 			.get('http://localhost:3001/product/' + this.props.match.params.id)
 			.then(response => {
 				this.setState({ games: response.data });
-				console.log(this.state.games);
+				// console.log(this.state.games);
 			});
 	}
+
+	gopurchase = () => {
+		// console.log('abc');
+
+		if (localStorage.getItem('token')) {
+			window.location = '/product/' + this.props.match.params.id + '/payment';
+		} else {
+			this.setState({ isloggedin: true });
+		}
+	};
 
 	render() {
 		return (
 			<div>
 				<NabBar />
+				{this.state.isloggedin ? (
+					<Alert color="danger">
+						<a href="/login" className="alert-link">
+							Your are not Logged in! Click here to log in.
+						</a>
+					</Alert>
+				) : (
+					<div></div>
+				)}
 				<div className="container">
 					<Jumbotron style={{ paddingBottom: 5 }}>
 						<hr className="my-4" />
@@ -55,11 +83,11 @@ export default class Product extends Component {
 									>
 										price
 									</h1>
-									<p>
-										<h2>
+									<h2>
+										<p>
 											<Badge>RS {this.state.games.price}</Badge>
-										</h2>
-									</p>
+										</p>
+									</h2>
 
 									<h1
 										style={{
@@ -69,14 +97,19 @@ export default class Product extends Component {
 									>
 										Brand
 									</h1>
-									<p>
-										<h2>
+									<h2>
+										<p>
 											<Badge>{this.state.games.brand}</Badge>
-										</h2>
-									</p>
-
-									<Button color="primary" size="lg" block>
-										<h3 class="font-weight-bold">Purchase</h3>
+										</p>
+									</h2>
+									<Button
+										color="primary"
+										outline
+										onClick={this.gopurchase}
+										size="lg"
+										block
+									>
+										<h3>Purchase</h3>
 									</Button>
 								</div>
 							</Row>
@@ -88,11 +121,9 @@ export default class Product extends Component {
 							>
 								Description
 							</h1>
-							<p>
-								<h2 class="text-white bg-dark" style={{ paddingBottom: 5 }}>
-									{this.state.games.description}
-								</h2>
-							</p>
+							<h2 className="text-white bg-dark" style={{ paddingBottom: 5 }}>
+								<p>{this.state.games.description}</p>
+							</h2>
 						</div>
 					</Jumbotron>
 				</div>

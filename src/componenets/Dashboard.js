@@ -14,7 +14,8 @@ import {
 	CardText,
 	CardBody,
 	CardTitle,
-	CardSubtitle
+	CardSubtitle,
+	Alert
 } from 'reactstrap';
 import 'react-bootstrap-carousel/dist/react-bootstrap-carousel.css';
 import Background01 from '../images/background.jpg';
@@ -47,6 +48,10 @@ const responsive = {
 export default class Dashboard extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			id: null
+		};
+
 		//retrieveing advertise images
 		axios.get('http://localhost:3001/adver/all').then(response => {
 			localStorage.setItem('advertisements', JSON.stringify(response.data));
@@ -75,6 +80,11 @@ export default class Dashboard extends Component {
 		return (
 			<div>
 				<NabBar />
+				{this.props.location.state !== undefined ? (
+					<Alert color="info">{this.props.location.state.id}</Alert>
+				) : (
+					<div></div>
+				)}
 
 				{/*----------------------Section 1 */}
 				<div
