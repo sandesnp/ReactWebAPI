@@ -75,19 +75,30 @@ export default function NAB() {
 					</NavItem>
 					<UncontrolledDropdown nav inNavbar>
 						<DropdownToggle nav caret>
-							Options
+							My Purchase
 						</DropdownToggle>
 						<DropdownMenu right>
-							<a href="/google.com/">
-								<DropdownItem>Option 1</DropdownItem>
-							</a>
-							<a href="google.com">
-								<DropdownItem>Option 1</DropdownItem>
-							</a>
-							<DropdownItem divider />
-							<a href="google.com">
-								<DropdownItem>Option 1</DropdownItem>
-							</a>
+							{profileretrieved ? (
+								<div>
+									<DropdownItem>
+										<a href="/user/purchase">My Purchases</a>
+									</DropdownItem>
+									<DropdownItem divider />
+									<DropdownItem>
+										<a href="/user">My Profile</a>
+									</DropdownItem>
+								</div>
+							) : (
+								<div>
+									<DropdownItem disabled>
+										<a href="/user/purchase">My Purchases</a>
+									</DropdownItem>
+									<DropdownItem divider />
+									<DropdownItem disabled>
+										<a href="/user">My Profile</a>
+									</DropdownItem>
+								</div>
+							)}
 						</DropdownMenu>
 					</UncontrolledDropdown>
 					<NavItem>

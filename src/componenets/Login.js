@@ -34,15 +34,14 @@ export default class Login extends Component {
 			.then(response => {
 				console.log(response.data);
 				localStorage.setItem('token', response.data.token);
-				localStorage.setItem('isLoggedIn', 'logged');
-				// window.location = '/';
+				window.location = '/';
 			})
 			.catch(err => console.log(err.response));
 		this.setState({ email: '', password: '' });
 	};
 
 	render() {
-		if (localStorage.getItem('isLoggedIn')) {
+		if (localStorage.getItem('token')) {
 			return <Redirect to="/" />;
 		}
 		return (

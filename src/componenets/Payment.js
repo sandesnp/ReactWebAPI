@@ -1,17 +1,12 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import NabBar from './includes/Navbar';
 import {
 	InputGroup,
-	InputGroupText,
 	InputGroupAddon,
 	Input,
 	Jumbotron,
 	Container,
-	Dropdown,
-	DropdownToggle,
-	DropdownMenu,
-	DropdownItem,
 	Alert,
 	Button,
 	Form,
@@ -19,12 +14,11 @@ import {
 	Label,
 	Row,
 	Col,
-	FormText,
 	Modal,
 	ModalHeader,
-	ModalBody,
 	ModalFooter
 } from 'reactstrap';
+import axios from 'axios';
 
 let ispurchased = false;
 let state = {
@@ -34,8 +28,14 @@ let state = {
 	locationA: { locationB: '' },
 	notEmpty: false
 };
+
+let CompleteToken = {
+	config: {
+		headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+	}
+};
 export default function Payment(props) {
-	const { buttonLabel, className } = props;
+	const { className } = props;
 
 	const [modal, setModal] = useState(false);
 
@@ -60,6 +60,35 @@ export default function Payment(props) {
 
 	const toggle = () => setModal(!modal);
 
+	const UserUpdate = () => {
+		let productMain = { product: [] };
+		axios
+			.get('http://localhost:3001/users/profile', CompleteToken.config)
+			.then(response => {
+				response.data.product.forEach(element => {
+					let productABC = {
+						productid: element.productid,
+						productimage: element.productimage
+					};
+					productMain.product.push(productABC);
+				});
+			});
+		let productNext = {
+			productid: props.match.params.id,
+			productimage: props.match.params.img
+		};
+		productMain.product.push(productNext);
+		console.log(productMain);
+
+		axios
+			.put(
+				'http://localhost:3001/users/profile',
+				productMain,
+				CompleteToken.config
+			)
+			.catch(err => console.log(err.response));
+	};
+
 	const delivery = () => {
 		if (
 			state.cardnumberA.cardnumberB &&
@@ -67,6 +96,7 @@ export default function Payment(props) {
 			state.countryA.countryB &&
 			state.locationA.locationB
 		) {
+			UserUpdate();
 			ispurchased = true;
 		} else {
 			state.notEmpty = true;

@@ -21,13 +21,15 @@ export default class Product extends Component {
 				title: null,
 				price: null,
 				brand: null,
-				description: null
+				description: null,
+				product: { productid: null, productimage: null }
 			},
 			isloggedin: false
 		};
 	}
 
 	componentDidMount() {
+		console.log(this.props.match.params.id);
 		//retrieveing product data
 		axios
 			.get('http://localhost:3001/product/' + this.props.match.params.id)
@@ -41,7 +43,11 @@ export default class Product extends Component {
 		// console.log('abc');
 
 		if (localStorage.getItem('token')) {
-			window.location = '/product/' + this.props.match.params.id + '/payment';
+			window.location =
+				'/product/payment/' +
+				this.props.match.params.id +
+				'/' +
+				this.props.match.params.img;
 		} else {
 			this.setState({ isloggedin: true });
 		}

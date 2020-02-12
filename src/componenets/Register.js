@@ -14,7 +14,6 @@ import {
 	Input,
 	Badge
 } from 'reactstrap';
-let token;
 
 export default class Register extends Component {
 	constructor(props) {
@@ -59,13 +58,8 @@ export default class Register extends Component {
 			.then(response => {
 				// console.log(response.date);
 
-				token = {
-					headers: { Authorization: `Bearer ${response.data.token}` }
-				};
-				localStorage.setItem('token', JSON.stringify(token));
-				// this.setState({
-				// 	isRegistered: true
-				// });
+				localStorage.setItem('token', response.data.token);
+
 				window.location = '/';
 			})
 			.catch(err => console.log(err.response));
