@@ -16,7 +16,6 @@ import {
 	Input
 } from 'reactstrap';
 
-let isUpdated = false;
 export default class UserUpdate extends Component {
 	constructor(props) {
 		super(props);

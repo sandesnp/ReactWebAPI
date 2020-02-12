@@ -14,7 +14,6 @@ import {
 	Input,
 	Badge
 } from 'reactstrap';
-import Axios from 'axios';
 let token;
 
 export default class Register extends Component {
