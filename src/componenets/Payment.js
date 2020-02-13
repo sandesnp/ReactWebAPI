@@ -68,6 +68,7 @@ export default function Payment(props) {
 				response.data.product.forEach(element => {
 					let productABC = {
 						productid: element.productid,
+						productname: element.title,
 						productimage: element.productimage
 					};
 					productMain.product.push(productABC);
@@ -75,7 +76,8 @@ export default function Payment(props) {
 			});
 		let productNext = {
 			productid: props.match.params.id,
-			productimage: props.match.params.img
+			productimage: props.match.params.img,
+			productname: props.match.params.title
 		};
 		productMain.product.push(productNext);
 		console.log(productMain);

@@ -47,7 +47,9 @@ export default class Product extends Component {
 				'/product/payment/' +
 				this.props.match.params.id +
 				'/' +
-				this.props.match.params.img;
+				this.props.match.params.img +
+				'/' +
+				this.props.match.params.title;
 		} else {
 			this.setState({ isloggedin: true });
 		}

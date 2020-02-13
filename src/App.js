@@ -19,8 +19,12 @@ function App() {
 				<Switch>
 					<Route exact path="/" component={Dashboard} />
 					<Route exact path="/allproduct" component={AllProduct} />
-					<Route exact path="/product/:id/:img" component={Product} />
-					<Route exact path="/product/payment/:id/:img" component={Payment} />
+					<Route exact path="/product/:id/:img/:title" component={Product} />
+					<Route
+						exact
+						path="/product/payment/:id/:img/:title"
+						component={Payment}
+					/>
 					<Route exact path="/user" component={UserUpdate} />
 					<Route exact path="/user/purchase" component={MyPurchase} />
 					<Route exact path="/login" component={Login} />

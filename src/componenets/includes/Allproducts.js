@@ -7,8 +7,8 @@ export default function AllGames({ games, loading }) {
 		return <h2> Loading...</h2>;
 	}
 
-	let goproduct = (paramA, ParamB) => e => {
-		window.location = '/product/' + paramA + '/' + ParamB;
+	let goproduct = (paramA, paramB, paramC) => e => {
+		window.location = '/product/' + paramA + '/' + paramB + '/' + paramC;
 	};
 
 	const HoverText = styled.p`
@@ -38,7 +38,9 @@ export default function AllGames({ games, loading }) {
 									className="col-9"
 									style={{ textAlignVertical: 'center', textAlign: 'center' }}
 								>
-									<HoverText onClick={goproduct(game._id, game.image)}>
+									<HoverText
+										onClick={goproduct(game._id, game.image, game.title)}
+									>
 										<h2>{game.title}</h2>
 
 										<Col sm={{ size: 12, order: 0, offset: 0 }}>

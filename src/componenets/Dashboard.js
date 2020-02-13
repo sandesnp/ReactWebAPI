@@ -72,6 +72,7 @@ export default class Dashboard extends Component {
 				}
 			});
 		}
+		console.log(ThreeCard);
 	}
 
 	render() {
