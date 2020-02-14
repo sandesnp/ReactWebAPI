@@ -4,15 +4,11 @@ import axios from 'axios';
 import {
 	Card,
 	CardImg,
-	CardText,
 	CardBody,
-	CardTitle,
 	CardSubtitle,
 	Row,
-	CardLink,
 	Jumbotron,
-	Container,
-	Button
+	Container
 } from 'reactstrap';
 
 let CompleteToken = {

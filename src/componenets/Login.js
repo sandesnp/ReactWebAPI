@@ -15,6 +15,8 @@ import {
 	Alert
 } from 'reactstrap';
 
+let getToken;
+
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -24,19 +26,32 @@ export default class Login extends Component {
 		};
 	}
 	handleChange = e => {
-		console.log(this.state);
+		// console.log(this.state);
 		this.setState({ [e.target.name]: e.target.value });
 	};
-	submitForm = e => {
+	submitForm = async e => {
 		e.preventDefault();
-		axios
+		await axios
 			.post('http://localhost:3001/users/login', this.state)
 			.then(response => {
-				console.log(response.data);
+				// console.log(response.data);
 				localStorage.setItem('token', response.data.token);
-				window.location = '/';
+				getToken = {
+					headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+				};
+
+				axios
+					.get('http://localhost:3001/users/profile', getToken)
+					.then(response => {
+						if (response.data.admin === 'true') {
+							window.location = '/adminpanal';
+						}
+					});
+
+				// window.location = '/';
 			})
 			.catch(err => console.log(err.response));
+
 		this.setState({ email: '', password: '' });
 	};
 

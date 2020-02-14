@@ -11,12 +11,14 @@ import UserUpdate from './componenets/UserUpdate';
 import Product from './componenets/Product';
 import Payment from './componenets/Payment';
 import MyPurchase from './componenets/MyPurchase';
+import AdminPanel from './componenets/AdminPanal';
 
 function App() {
 	return (
 		<div className="App">
 			<BrowserRouter>
 				<Switch>
+					{/* User Section */}
 					<Route exact path="/" component={Dashboard} />
 					<Route exact path="/allproduct" component={AllProduct} />
 					<Route exact path="/product/:id/:img/:title" component={Product} />
@@ -29,6 +31,8 @@ function App() {
 					<Route exact path="/user/purchase" component={MyPurchase} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />{' '}
+					{/* Admin Section */}
+					<Route exact path="/adminpanal" component={AdminPanel} />
 				</Switch>
 			</BrowserRouter>
 		</div>
