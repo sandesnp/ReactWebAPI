@@ -16,15 +16,11 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 export default function ModalUpdate(allusers) {
-	let state = {
-		showEdit: false
-	};
-
 	const [modal, setModal] = useState(false);
 	const [users, setusers] = useState(allusers.allusers);
 	const toggle = () => {
 		setModal(!modal);
-		console.log(users);
+		// console.log(users);
 	};
 
 	const handleChange = e => {
@@ -58,7 +54,7 @@ export default function ModalUpdate(allusers) {
 			});
 		}
 
-		console.log(users);
+		// console.log(users);
 	};
 	const handleFileChange = e => {
 		const data = new FormData();
@@ -66,7 +62,7 @@ export default function ModalUpdate(allusers) {
 		axios
 			.post('http://localhost:3001/upload', data)
 			.then(response => {
-				console.log(response.data);
+				// console.log(response.data);
 
 				setusers({
 					_id: users._id,
@@ -91,8 +87,6 @@ export default function ModalUpdate(allusers) {
 			})
 			.catch(err => console.log(err.response));
 	};
-
-	const showEdit = state.showEdit;
 
 	return (
 		<div>

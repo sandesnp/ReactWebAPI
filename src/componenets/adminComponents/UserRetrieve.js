@@ -20,7 +20,7 @@ export default class UserRetrieve extends Component {
 
 	async componentDidMount(async) {
 		await axios
-			.get('http://localhost:3001/users/adminall', this.state.config)
+			.get('http://localhost:3001/users/adminprofileall', this.state.config)
 			.then(response => {
 				this.setState({
 					users: response.data
@@ -28,6 +28,19 @@ export default class UserRetrieve extends Component {
 			});
 		// console.log(this.state.users);
 	}
+
+	handledelete = propA => () => {
+		axios
+			.delete(
+				'http://localhost:3001/users/adminprofiledelete/' + propA,
+				this.state.config
+			)
+			.then(response => {
+				window.location.reload(false);
+			})
+			.catch(err => console.log(err.response));
+		console.log(propA);
+	};
 	render() {
 		return (
 			<div style={{ background: '#b7bdb9' }}>
@@ -59,7 +72,12 @@ export default class UserRetrieve extends Component {
 										</td>
 										<td>
 											{' '}
-											<Button color="danger">Delete</Button>{' '}
+											<Button
+												color="danger"
+												onClick={this.handledelete(allusers._id)}
+											>
+												Delete
+											</Button>{' '}
 										</td>
 									</tr>
 								))}
