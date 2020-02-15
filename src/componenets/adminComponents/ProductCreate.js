@@ -52,7 +52,7 @@ export default class ProductCreate extends Component {
 
 	register = e => {
 		e.preventDefault();
-		//console.log(this.state);
+
 		axios
 			.post('http://localhost:3001/product/', this.state)
 			.then(response => {

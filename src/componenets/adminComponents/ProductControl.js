@@ -27,7 +27,7 @@ export default class ProductControl extends Component {
 	handledelete = propA => () => {
 		axios
 			.delete(
-				'http://localhost:3001/users/adminprofiledelete/' + propA,
+				'http://localhost:3001/product/adminproductdelete/' + propA,
 				this.state.config
 			)
 			.then(response => {
@@ -70,7 +70,7 @@ export default class ProductControl extends Component {
 											{' '}
 											<Button
 												color="danger"
-												//onClick={this.handledelete(allproducts._id)}
+												onClick={this.handledelete(allproducts._id)}
 											>
 												Delete
 											</Button>{' '}
