@@ -17,6 +17,7 @@ import AdminPanel from './componenets/AdminPanal';
 
 import AdminUserControl from './componenets/adminComponents/UserControl';
 import AdminProductControl from './componenets/adminComponents/ProductControl';
+import AdminProductCreate from './componenets/adminComponents/ProductCreate';
 
 function App() {
 	return (
@@ -47,6 +48,11 @@ function App() {
 						exact
 						path="/adminpanal/productcontrol"
 						component={AdminProductControl}
+					/>
+					<Route
+						exact
+						path="/adminpanal/productcreate"
+						component={AdminProductCreate}
 					/>
 				</Switch>
 			</BrowserRouter>

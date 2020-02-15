@@ -15,9 +15,13 @@ import {
 	Input
 } from 'reactstrap';
 import axios from 'axios';
+
 export default function ModalProductUpdate(allproducts) {
 	const [modal, setModal] = useState(false);
 	const [products, setproducts] = useState(allproducts.allproducts);
+	const [config] = useState({
+		headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+	});
 	const toggle = () => {
 		setModal(!modal);
 		// console.log(users);
@@ -75,9 +79,9 @@ export default function ModalProductUpdate(allproducts) {
 
 				setproducts({
 					_id: products._id,
-					title: products.firstname,
-					price: products.lastname,
-					brand: products.phonenumber,
+					title: products.title,
+					price: products.price,
+					brand: products.brand,
 					description: products.description,
 					image: response.data.filename
 				});
@@ -86,11 +90,12 @@ export default function ModalProductUpdate(allproducts) {
 	};
 
 	const update = async e => {
+		console.log(config);
 		e.preventDefault();
 		// console.log(this.state);
 		// console.log(users);
 		await axios
-			.put('http://localhost:3001/users/adminprofileupdate', products)
+			.put('http://localhost:3001/product/adminproductupdate', products, config)
 			.then(response => {
 				toggle();
 				window.location.reload(false);

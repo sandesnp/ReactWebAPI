@@ -7,7 +7,11 @@ import {
 	Nav,
 	Button,
 	NavLink,
-	NavItem
+	NavItem,
+	UncontrolledDropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem
 } from 'reactstrap';
 
 export default function NAB() {
@@ -33,9 +37,23 @@ export default function NAB() {
 					<NavItem>
 						<NavLink href="/adminpanal/usercontrol">User Control</NavLink>
 					</NavItem>
-					<NavItem>
-						<NavLink href="/adminpanal/productcontrol">Product Control</NavLink>
-					</NavItem>
+
+					<UncontrolledDropdown nav inNavbar>
+						<DropdownToggle nav caret>
+							Product Control
+						</DropdownToggle>
+						<DropdownMenu right>
+							<div>
+								<DropdownItem>
+									<a href="/adminpanal/productcreate"> Product Creation</a>
+								</DropdownItem>
+								<DropdownItem divider />
+								<DropdownItem>
+									<a href="/adminpanal/productcontrol">Product Data Control</a>
+								</DropdownItem>
+							</div>
+						</DropdownMenu>
+					</UncontrolledDropdown>
 				</Nav>
 
 				<Button onClick={handleLogout}>Logout</Button>
