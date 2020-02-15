@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import AdminNabBar from './AdminNab';
 
-import ModalUpdate from './ModalUpdate';
+import ModalUserUpdate from './ModalUserUpdate';
 
 import { Jumbotron, Table, Button, Container } from 'reactstrap';
 
@@ -10,7 +10,6 @@ export default class UserRetrieve extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showEdit: false,
 			users: [],
 			config: {
 				headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -48,7 +47,7 @@ export default class UserRetrieve extends Component {
 
 				<Jumbotron fluid>
 					<Container fluid>
-						<h1 className="display-3">All Users</h1>
+						<h1 className="display-3">USER CONTROL</h1>
 						<Table>
 							<thead>
 								<tr>
@@ -68,7 +67,7 @@ export default class UserRetrieve extends Component {
 										<td>{allusers.lastname}</td>
 										<td>{allusers.phonenumber}</td>
 										<td>
-											<ModalUpdate allusers={allusers} />
+											<ModalUserUpdate allusers={allusers} />
 										</td>
 										<td>
 											{' '}

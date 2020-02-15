@@ -15,7 +15,8 @@ import MyPurchase from './componenets/MyPurchase';
 // Admin Imports
 import AdminPanel from './componenets/AdminPanal';
 
-import AdminUserRetrieve from './componenets/adminComponents/UserRetrieve';
+import AdminUserControl from './componenets/adminComponents/UserControl';
+import AdminProductControl from './componenets/adminComponents/ProductControl';
 
 function App() {
 	return (
@@ -39,8 +40,13 @@ function App() {
 					<Route exact path="/adminpanal" component={AdminPanel} />
 					<Route
 						exact
-						path="/adminpanal/userget"
-						component={AdminUserRetrieve}
+						path="/adminpanal/usercontrol"
+						component={AdminUserControl}
+					/>
+					<Route
+						exact
+						path="/adminpanal/productcontrol"
+						component={AdminProductControl}
 					/>
 				</Switch>
 			</BrowserRouter>

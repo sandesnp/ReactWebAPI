@@ -31,10 +31,10 @@ export default function NAB() {
 			<Collapse isOpen={isOpen} navbar>
 				<Nav className="mr-auto" navbar>
 					<NavItem>
-						<NavLink href="/adminpanal/userget">All User Retrieve</NavLink>
+						<NavLink href="/adminpanal/usercontrol">User Control</NavLink>
 					</NavItem>
 					<NavItem>
-						<NavLink href="/adminpanal/userget">All User Retrieve</NavLink>
+						<NavLink href="/adminpanal/productcontrol">Product Control</NavLink>
 					</NavItem>
 				</Nav>
 

@@ -15,46 +15,55 @@ import {
 	Input
 } from 'reactstrap';
 import axios from 'axios';
-export default function ModalUpdate(allusers) {
+export default function ModalProductUpdate(allproducts) {
 	const [modal, setModal] = useState(false);
-	const [users, setusers] = useState(allusers.allusers);
+	const [products, setproducts] = useState(allproducts.allproducts);
 	const toggle = () => {
 		setModal(!modal);
 		// console.log(users);
 	};
 
 	const handleChange = e => {
-		if (e.target.name === 'firstname') {
-			setusers({
-				_id: users._id,
-				firstname: e.target.value,
-				lastname: users.lastname,
-				phonenumber: users.phonenumber,
-				profile_image: users.profile_image
+		if (e.target.name === 'title') {
+			setproducts({
+				_id: products._id,
+				title: e.target.value,
+				price: products.price,
+				brand: products.brand,
+				description: products.description
 			});
 		}
 
-		if (e.target.name === 'lastname') {
-			setusers({
-				_id: users._id,
-				firstname: users.firstname,
-				lastname: e.target.value,
-				phonenumber: users.phonenumber,
-				profile_image: users.profile_image
+		if (e.target.name === 'price') {
+			setproducts({
+				_id: products._id,
+				title: products.title,
+				price: e.target.value,
+				brand: products.brand,
+				description: products.description
 			});
 		}
 
-		if (e.target.name === 'phonenumber') {
-			setusers({
-				_id: users._id,
-				firstname: users.firstname,
-				lastname: users.lastname,
-				phonenumber: e.target.value,
-				profile_image: users.profile_image
+		if (e.target.name === 'brand') {
+			setproducts({
+				_id: products._id,
+				title: products.title,
+				price: products.price,
+				brand: e.target.value,
+				description: products.description
+			});
+		}
+		if (e.target.name === 'description') {
+			setproducts({
+				_id: products._id,
+				title: products.title,
+				price: products.price,
+				brand: products.brand,
+				description: e.target.value
 			});
 		}
 
-		// console.log(users);
+		console.log(products);
 	};
 	const handleFileChange = e => {
 		const data = new FormData();
@@ -64,12 +73,13 @@ export default function ModalUpdate(allusers) {
 			.then(response => {
 				// console.log(response.data);
 
-				setusers({
-					_id: users._id,
-					firstname: users.firstname,
-					lastname: users.lastname,
-					phonenumber: users.phonenumber,
-					profile_image: response.data.filename
+				setproducts({
+					_id: products._id,
+					title: products.firstname,
+					price: products.lastname,
+					brand: products.phonenumber,
+					description: products.description,
+					image: response.data.filename
 				});
 			})
 			.catch(err => console.log(err.response));
@@ -80,7 +90,7 @@ export default function ModalUpdate(allusers) {
 		// console.log(this.state);
 		// console.log(users);
 		await axios
-			.put('http://localhost:3001/users/adminprofileupdate', users)
+			.put('http://localhost:3001/users/adminprofileupdate', products)
 			.then(response => {
 				toggle();
 				window.location.reload(false);
@@ -94,16 +104,16 @@ export default function ModalUpdate(allusers) {
 				Update
 			</Button>
 			<Modal isOpen={modal} toggle={toggle}>
-				<ModalHeader toggle={toggle}>Edit User</ModalHeader>
+				<ModalHeader toggle={toggle}>Edit Product</ModalHeader>
 				<ModalBody>
 					<Form
 						action="?"
 						method="post"
-						style={{ width: '50%', margin: '0 auto' }}
+						style={{ width: '100%', margin: '0 auto' }}
 					>
-						<Col sm="12" md={{ size: 6, offset: 5 }} className="mb-3">
+						<Col sm="12" md={{ size: 6, offset: 2 }} className="mb-3">
 							<ExampleComponent
-								image={`http://localhost:3001/uploads/${allusers.allusers.profile_image}`}
+								image={`http://localhost:3001/uploads/${allproducts.allproducts.image}`}
 								roundedColor="#66A5CC"
 								imageWidth="150"
 								imageHeight="150"
@@ -112,52 +122,67 @@ export default function ModalUpdate(allusers) {
 						</Col>
 						<FormGroup row>
 							<Label for="examplePassword" sm={3}>
-								First Name
+								Title
 							</Label>
 							<Col sm={9}>
 								<Input
 									type="text"
-									name="firstname"
-									id="firstname"
-									value={users.firstname}
-									placeholder="first name"
+									name="title"
+									id="title"
+									value={products.title}
+									placeholder="Title"
 									onChange={handleChange}
 								/>
 							</Col>
 						</FormGroup>
 						<FormGroup row>
 							<Label for="examplePassword" sm={3}>
-								Last Name
+								Price
 							</Label>
 							<Col sm={9}>
 								<Input
 									type="text"
-									name="lastname"
-									id="lastname"
-									placeholder="last name"
-									value={users.lastname}
+									name="price"
+									id="price"
+									placeholder="Price"
+									value={products.price}
 									onChange={handleChange}
 								/>
 							</Col>
 						</FormGroup>
 						<FormGroup row>
 							<Label for="examplePassword" sm={3}>
-								Phone Number
+								Brand
 							</Label>
 							<Col sm={9}>
 								<Input
-									type="number"
-									name="phonenumber"
-									id="phonenumber"
-									placeholder="phone number"
-									value={users.phonenumber}
+									type="text"
+									name="brand"
+									id="brand"
+									placeholder="Brand"
+									value={products.brand}
+									onChange={handleChange}
+								/>
+							</Col>
+						</FormGroup>
+						<FormGroup row>
+							<Label for="examplePassword" sm={3}>
+								Description
+							</Label>
+							<Col sm={12}>
+								<Input
+									type="textarea"
+									name="description"
+									id="desciption"
+									placeholder="Description"
+									value={products.description}
 									onChange={handleChange}
 								/>
 							</Col>
 						</FormGroup>
 						<FormGroup row>
 							<Label for="exampleFile" sm={3}>
-								Profile Picture
+								Product Image
 							</Label>
 							<Col sm={9}>
 								<Alert color="primary">
