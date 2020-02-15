@@ -43,7 +43,8 @@ export default class Login extends Component {
 				axios
 					.get('http://localhost:3001/users/profile', getToken)
 					.then(response => {
-						if (response.data.admin === 'true') {
+						if (response.data.admin) {
+							//checks if admin attribute of USER object is true or false
 							window.location = '/adminpanal';
 						}
 					});

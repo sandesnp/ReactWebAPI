@@ -4,6 +4,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import NabBar from './includes/Navbar';
 import axios from 'axios';
+import styled from 'styled-components';
 
 import {
 	Row,
@@ -15,12 +16,18 @@ import {
 	CardBody,
 	CardTitle,
 	CardSubtitle,
+	Jumbotron,
 	Alert
 } from 'reactstrap';
 import 'react-bootstrap-carousel/dist/react-bootstrap-carousel.css';
-import Background01 from '../images/background.jpg';
-import Background02 from '../images/login_background.jpg';
-import Background03 from '../images/register_background.jpg';
+import Background01 from '../images/dashboardcar1.jpg';
+import Background02 from '../images/dashboardcar2.png';
+import Background03 from '../images/dashboardcar3.jpg';
+import Background04 from '../images/dashboardcar4.jpg';
+
+// import Backgrounddash01 from '../images/dashboard1.jpg';
+import Backgrounddash02 from '../images/dashboard2.jpg';
+import Backgrounddash03 from '../images/dashboard3.jpg';
 
 const styles = { height: 400, width: '100%' };
 let advertisementsRetrieved;
@@ -44,6 +51,14 @@ const responsive = {
 		slidesToSlide: 1 // optional, default to 1.
 	}
 };
+
+const HoverText = styled.p`
+	color: #000;
+	:hover {
+		color: #ed1212;
+		cursor: pointer;
+	}
+`;
 
 export default class Dashboard extends Component {
 	constructor(props) {
@@ -75,6 +90,10 @@ export default class Dashboard extends Component {
 		console.log(ThreeCard);
 	}
 
+	goAllProduct = () => {
+		window.location = '/allproduct';
+	};
+
 	render() {
 		const handleOnDragStart = e => e.preventDefault();
 
@@ -88,14 +107,7 @@ export default class Dashboard extends Component {
 				)}
 
 				{/*----------------------Section 1 */}
-				<div
-					className="container-fluid"
-					style={{
-						paddingBottom: 20,
-						paddingRight: '50px',
-						paddingLeft: '50px'
-					}}
-				>
+				<div>
 					<Row>
 						<Col span={12} style={{ marginTop: 20 }}>
 							<RBCarousel
@@ -111,8 +123,6 @@ export default class Dashboard extends Component {
 									}}
 								>
 									<div className="carousel-center"></div>
-									<div className="carousel-center"> </div>
-									<div className="carousel-caption">Text</div>
 								</div>
 								<div
 									style={{
@@ -122,7 +132,15 @@ export default class Dashboard extends Component {
 									}}
 								>
 									<div className="carousel-center"></div>
-									<div className="carousel-caption">Text</div>
+								</div>
+								<div
+									style={{
+										...styles,
+										backgroundImage: 'url(' + Background04 + ')',
+										backgroundSize: 'cover'
+									}}
+								>
+									<div className="carousel-center"></div>
 								</div>
 								<div
 									style={{
@@ -132,72 +150,122 @@ export default class Dashboard extends Component {
 									}}
 								>
 									<div className="carousel-center"></div>
-									<div className="carousel-caption">Text</div>
 								</div>
 							</RBCarousel>
 						</Col>
 					</Row>
 				</div>
 				{/*----------------------Section 2 */}
-				<Row className="col-12" style={{ marginLeft: 5 }}>
-					{ThreeCard.map(card => (
-						<Card className="col-4" key={card._id}>
-							{' '}
-							{/*No key for now*/}
-							<CardImg
-								top
-								width="100%"
-								src={`http://localhost:3001/uploads/${card.image}`}
-								alt="Card image cap"
-							/>
-							<CardBody>
-								<CardTitle>{card.title}</CardTitle>
-								<CardSubtitle>Card subtitle</CardSubtitle>
-								<CardText>{card.description}</CardText>
-								<Button>Button</Button>
-							</CardBody>
-						</Card>
-					))}
-				</Row>
-				<br />
-				{/*----------------------Section 3 */}
-				<div>
-					<Carousel
-						additionalTransfrom={0}
-						arrows
-						autoPlaySpeed={3000}
-						centerMode={false}
-						containerClass="container-with-dots"
-						draggable
-						infinite
-						keyBoardControl
-						minimumTouchDrag={80}
-						renderButtonGroupOutside={false}
-						renderDotsOutside={false}
-						responsive={responsive}
-						showDots={false}
-						slidesToSlide={1}
-						swipeable
-					>
-						{DashSlider.map(slider => (
-							<Card className="col-11" key={slider._id} style={{ padding: 0 }}>
+				<Jumbotron className="text-white bg-dark">
+					<h1 className="display-3">Check out our Wares!</h1>
+					<p className="lead">
+						We have a great selection of products and we hope to fully satisfy
+						the requirements of our customers. Thank you.
+					</p>
+
+					<p>
+						We offer weekly discount and great prices at festive sales. Don't
+						miss your chance to get a great value.
+					</p>
+					<hr className="my-2" />
+				</Jumbotron>
+
+				<Jumbotron
+					style={{
+						fontFamily: '"Times New Roman", Times, serif',
+						fontWeight: 'bold',
+
+						backgroundImage: 'url(' + Backgrounddash03 + ')',
+						backgroundSize: 'cover',
+						marginBottom: 0
+					}}
+				>
+					<h2 className="text-white bg-dark">
+						Gaming requires high permoring gears and essentials for best
+						experience. Find out why!
+					</h2>
+					<br />
+
+					<hr className="my-2" />
+					<Row className="col-12" style={{ marginLeft: 5 }}>
+						{ThreeCard.map(card => (
+							<Card className="col-3" key={card._id} style={{ margin: '2%' }}>
 								{' '}
 								{/*No key for now*/}
 								<CardImg
-									onDragStart={handleOnDragStart}
 									top
 									width="100%"
-									src={`http://localhost:3001/uploads/${slider.image}`}
+									src={`http://localhost:3001/uploads/${card.image}`}
 									alt="Card image cap"
 								/>
-								<CardBody style={{ padding: 0 }}>
-									<a href="/allproduct">
-										<CardTitle>{slider.position}</CardTitle>
-									</a>
+								<CardBody>
+									<HoverText onClick={this.goAllProduct}>
+										<CardTitle>{card.title}</CardTitle>
+
+										<CardText>{card.description}</CardText>
+									</HoverText>
 								</CardBody>
 							</Card>
 						))}
-					</Carousel>
+					</Row>
+				</Jumbotron>
+
+				{/*----------------------Section 3 */}
+				<div>
+					<Jumbotron
+						style={{
+							fontFamily: '"Times New Roman", Times, serif',
+							fontWeight: 'bold',
+
+							backgroundImage: 'url(' + Backgrounddash02 + ')',
+							backgroundSize: 'cover'
+						}}
+					>
+						<p className="lead">
+							<h2 className="text-white bg-dark">Checkout our Selection</h2>
+						</p>
+						<hr className="my-2" />
+						<Carousel
+							additionalTransfrom={0}
+							arrows
+							autoPlaySpeed={3000}
+							centerMode={false}
+							containerClass="container-with-dots"
+							draggable
+							infinite
+							keyBoardControl
+							minimumTouchDrag={80}
+							renderButtonGroupOutside={false}
+							renderDotsOutside={false}
+							responsive={responsive}
+							showDots={false}
+							slidesToSlide={1}
+							swipeable
+						>
+							{DashSlider.map(slider => (
+								<Card
+									className="col-11"
+									key={slider._id}
+									style={{ padding: 0 }}
+								>
+									{' '}
+									{/*No key for now*/}
+									<CardImg
+										onDragStart={handleOnDragStart}
+										top
+										width="100%"
+										src={`http://localhost:3001/uploads/${slider.image}`}
+										alt="Card image cap"
+									/>
+									<CardBody style={{ padding: 0 }}>
+										<a href="/allproduct">
+											<CardTitle>Check Products here</CardTitle>
+										</a>
+									</CardBody>
+								</Card>
+							))}
+						</Carousel>
+					</Jumbotron>
 				</div>
 				<br />
 			</div>
