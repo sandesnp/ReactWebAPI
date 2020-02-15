@@ -3,7 +3,6 @@ import axios from 'axios';
 import AdminNabBar from './AdminNab';
 import {
 	Jumbotron,
-	Table,
 	Button,
 	Container,
 	Col,
@@ -12,8 +11,7 @@ import {
 	FormGroup,
 	Label,
 	FormText,
-	Input,
-	Badge
+	Input
 } from 'reactstrap';
 
 export default class ProductCreate extends Component {

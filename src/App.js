@@ -11,6 +11,7 @@ import UserUpdate from './componenets/UserUpdate';
 import Product from './componenets/Product';
 import Payment from './componenets/Payment';
 import MyPurchase from './componenets/MyPurchase';
+import Contact from './componenets/Contact';
 
 // Admin Imports
 import AdminPanel from './componenets/AdminPanal';
@@ -37,6 +38,7 @@ function App() {
 					<Route exact path="/user/purchase" component={MyPurchase} />
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />{' '}
+					<Route exact path="/contact" component={Contact} />{' '}
 					{/* Admin Section */}
 					<Route exact path="/adminpanal" component={AdminPanel} />
 					<Route

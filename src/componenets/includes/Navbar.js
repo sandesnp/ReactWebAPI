@@ -102,7 +102,7 @@ export default function NAB() {
 						</DropdownMenu>
 					</UncontrolledDropdown>
 					<NavItem>
-						<NavLink href="#">Contact</NavLink>
+						<NavLink href="/contact">Contact</NavLink>
 					</NavItem>
 				</Nav>
 				<Nav>
