@@ -11,7 +11,11 @@ import UserUpdate from './componenets/UserUpdate';
 import Product from './componenets/Product';
 import Payment from './componenets/Payment';
 import MyPurchase from './componenets/MyPurchase';
+
+// Admin Imports
 import AdminPanel from './componenets/AdminPanal';
+
+import AdminUserRetrieve from './componenets/adminComponents/UserRetrieve';
 
 function App() {
 	return (
@@ -33,6 +37,11 @@ function App() {
 					<Route exact path="/register" component={Register} />{' '}
 					{/* Admin Section */}
 					<Route exact path="/adminpanal" component={AdminPanel} />
+					<Route
+						exact
+						path="/adminpanal/userget"
+						component={AdminUserRetrieve}
+					/>
 				</Switch>
 			</BrowserRouter>
 		</div>

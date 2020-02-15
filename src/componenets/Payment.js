@@ -99,6 +99,7 @@ export default function Payment(props) {
 			state.locationA.locationB
 		) {
 			UserUpdate();
+			toggle(); //changes here ><<<<
 			ispurchased = true;
 		} else {
 			state.notEmpty = true;

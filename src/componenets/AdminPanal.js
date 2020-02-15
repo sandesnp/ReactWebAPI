@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AdminNabBar from './includes/AdminNab';
+import AdminNabBar from './adminComponents/AdminNab';
 import { Jumbotron, Container } from 'reactstrap';
 export default class AdminPanal extends Component {
 	render() {
