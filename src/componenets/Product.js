@@ -10,6 +10,7 @@ import {
 } from 'reactstrap';
 import NabBar from './includes/Navbar';
 import axios from 'axios';
+import MyFooter from './includes/MyFooter';
 
 export default class Product extends Component {
 	constructor(props) {
@@ -135,6 +136,7 @@ export default class Product extends Component {
 						</div>
 					</Jumbotron>
 				</div>
+				<MyFooter />
 			</div>
 		);
 	}

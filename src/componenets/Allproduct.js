@@ -4,6 +4,7 @@ import Products from './includes/Allproducts';
 import Pagination from './includes/Pagination';
 import NabBar from './includes/Navbar';
 import axios from 'axios';
+import MyFooter from './includes/MyFooter';
 
 export default function Allproduct() {
 	const [games, setGames] = useState([]);
@@ -53,6 +54,7 @@ export default function Allproduct() {
 				paginate={paginate}
 			/>
 			<Products games={currentPosts} loading={loading} />
+			<MyFooter />
 		</div>
 	);
 }

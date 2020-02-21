@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import NabBar from './includes/Navbar';
+import MyFooter from './includes/MyFooter';
 import {
 	InputGroup,
 	InputGroupAddon,
@@ -218,6 +219,7 @@ export default function Payment(props) {
 					</Container>
 				</Jumbotron>
 			</div>
+			<MyFooter />
 		</div>
 	);
 }

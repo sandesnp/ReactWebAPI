@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ExampleComponent from 'react-rounded-image';
 import axios from 'axios';
+import MyFooter from './includes/MyFooter';
 import NabBar from './includes/Navbar';
 
 import {
@@ -161,6 +162,7 @@ export default class UserUpdate extends Component {
 						</Form>
 					</Container>
 				</Jumbotron>
+				<MyFooter />
 			</div>
 		);
 	}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NabBar from './includes/Navbar';
 import axios from 'axios';
+import MyFooter from './includes/MyFooter';
 import {
 	Card,
 	CardImg,
@@ -96,6 +97,7 @@ export default class MyPurchase extends Component {
 						</Container>
 					</Jumbotron>
 				</div>
+				<MyFooter />
 			</div>
 		);
 	}

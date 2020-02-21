@@ -5,17 +5,16 @@ import 'react-multi-carousel/lib/styles.css';
 import NabBar from './includes/Navbar';
 import axios from 'axios';
 import styled from 'styled-components';
+import MyFooter from './includes/MyFooter';
 
 import {
 	Row,
 	Col,
-	Button,
 	Card,
 	CardImg,
 	CardText,
 	CardBody,
 	CardTitle,
-	CardSubtitle,
 	Jumbotron,
 	Alert
 } from 'reactstrap';
@@ -267,7 +266,7 @@ export default class Dashboard extends Component {
 						</Carousel>
 					</Jumbotron>
 				</div>
-				<br />
+				<MyFooter />
 			</div>
 		);
 	}

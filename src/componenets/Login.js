@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Background from '../images/login_background.jpg';
 import NabBar from './includes/Navbar';
+import MyFooter from './includes/MyFooter';
 
 import {
 	Col,
@@ -121,6 +122,7 @@ export default class Login extends Component {
 						</Col>
 					</div>
 				</div>
+				<MyFooter />
 			</div>
 		);
 	}

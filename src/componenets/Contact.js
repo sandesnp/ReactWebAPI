@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NabBar from './includes/Navbar';
 import { Redirect } from 'react-router-dom';
+import MyFooter from './includes/MyFooter';
 import {
 	Jumbotron,
 	Container,
@@ -21,8 +22,8 @@ export default class Contact extends Component {
 		super(props);
 		this.state = {
 			iscontacted: null,
-			email: null,
-			feedback: null
+			email: '',
+			feedback: ''
 		};
 	}
 
@@ -71,9 +72,7 @@ export default class Contact extends Component {
 						backgroundAttachment: 'fixed'
 					}}
 				>
-					<div style={{ height: 200 }}>
-						<h1></h1>
-					</div>
+					<div style={{ height: 200 }}></div>
 				</div>
 
 				<div className="container">
@@ -84,10 +83,11 @@ export default class Contact extends Component {
 								src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13284.690746245893!2d85.34958793400875!3d27.693473467706877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2snp!4v1581771770318!5m2!1sen!2snp"
 								width="90%"
 								height="600"
-								frameborder="0"
+								frameBorder="0"
 								style={{ border: 0 }}
-								allowfullscreen=""
-							></iframe>
+								allowFullScreen=""
+								title="myframe"
+							/>
 							<br />
 							<Card style={{ marginTop: 50 }}>
 								<CardBody>
@@ -137,6 +137,7 @@ export default class Contact extends Component {
 						</Container>
 					</Jumbotron>
 				</div>
+				<MyFooter />
 			</div>
 		);
 	}

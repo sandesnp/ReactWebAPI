@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Background from '../images/register_background.jpg';
 import NabBar from './includes/Navbar';
+import MyFooter from './includes/MyFooter';
 import {
 	Col,
 	Form,
@@ -195,6 +196,7 @@ export default class Register extends Component {
 						</Form>
 					</div>
 				</div>
+				<MyFooter />
 			</div>
 		);
 	}
